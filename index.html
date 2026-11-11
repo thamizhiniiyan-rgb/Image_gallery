@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LUMINA – Explore the World Through Images. A curated, interactive dark-themed photography and visual art gallery." />
+  <title>LUMINA – Explore the World Through Images</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#gallery">Skip to gallery</a>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header id="site-header" class="site-header">
+    <div class="container header-inner">
+      <a href="#home" class="brand-logo" aria-label="LUMINA Home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 4L28 25H4L16 4Z" stroke="url(#brand-grad)" stroke-width="2.4" stroke-linejoin="round" />
+            <circle cx="16" cy="18.5" r="3.4" fill="url(#brand-grad)" />
+            <defs>
+              <linearGradient id="brand-grad" x1="4" y1="4" x2="28" y2="26" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#A78BFA" />
+                <stop offset="100%" stop-color="#38D9C5" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-text">LUMINA</span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#home" class="nav-link active" data-nav-section="home">Home</a></li>
+          <li><a href="#gallery" class="nav-link" data-nav-section="gallery">Gallery</a></li>
+          <li><a href="#categories" class="nav-link" data-nav-section="categories">Categories</a></li>
+          <li><a href="#about" class="nav-link" data-nav-section="about">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Header Search Bar / Expandable Control -->
+        <div id="header-search-box" class="header-search" role="search">
+          <button
+            type="button"
+            id="header-search-toggle"
+            class="icon-btn header-search-trigger"
+            aria-label="Toggle search bar"
+            aria-expanded="false"
+            aria-controls="header-search-input"
+            title="Search gallery"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <input
+            type="search"
+            id="header-search-input"
+            class="header-search-input"
+            placeholder="Search titles or categories..."
+            aria-label="Search images by title or category"
+            autocomplete="off"
+          />
+          <button
+            type="button"
+            id="header-search-clear"
+            class="search-clear-btn"
+            aria-label="Clear search"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Quick Favorites Shortcut -->
+        <button
+          type="button"
+          id="nav-favorites-btn"
+          class="favorites-nav-btn"
+          aria-label="View favorite images"
+          title="View saved favorites"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="fav-label">Favorites</span>
+          <span id="header-fav-count" class="count-pill">0</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button
+          type="button"
+          id="theme-toggle"
+          class="icon-btn theme-toggle"
+          aria-label="Switch to light theme"
+          aria-pressed="false"
+          title="Toggle dark/light theme"
+        >
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Hamburger Button -->
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          class="icon-btn mobile-menu-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hamburger-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+      <div class="container mobile-menu-inner">
+        <div class="mobile-search-wrap" role="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="search"
+            id="mobile-search-input"
+            class="mobile-search-input"
+            placeholder="Search titles or categories..."
+            aria-label="Search images on mobile"
+            autocomplete="off"
+          />
+          <button
+            type="button"
+            id="mobile-search-clear"
+            class="search-clear-btn"
+            aria-label="Clear mobile search"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Mobile Navigation">
+          <a href="#home" class="mobile-nav-link active" data-nav-section="home">Home</a>
+          <a href="#gallery" class="mobile-nav-link" data-nav-section="gallery">Gallery</a>
+          <a href="#categories" class="mobile-nav-link" data-nav-section="categories">Categories</a>
+          <a href="#about" class="mobile-nav-link" data-nav-section="about">About</a>
+          <button type="button" id="mobile-favorites-btn" class="mobile-nav-link mobile-fav-link">
+            <span>Saved Favorites</span>
+            <span id="mobile-fav-count" class="count-pill">0</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-backdrop" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1572992795704-a22cbfd5e992?auto=format&fit=crop&w=1800&q=80"
+          alt=""
+          class="hero-bg-img"
+        />
+        <div class="hero-overlay"></div>
+        <div class="hero-glow hero-glow-violet"></div>
+        <div class="hero-glow hero-glow-teal"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge animate-hero" style="--delay: 0ms">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span>Curated Visual Anthology • 2026</span>
+          </div>
+
+          <h1 class="hero-title animate-hero" style="--delay: 80ms">
+            Discover Beauty in <span class="gradient-text">Every Frame.</span>
+          </h1>
+
+          <p class="hero-subtitle animate-hero" style="--delay: 160ms">
+            Explore a curated collection of extraordinary moments, places, and perspectives.
+          </p>
+
+          <div class="hero-cta-group animate-hero" style="--delay: 240ms">
+            <a href="#gallery" id="hero-explore-btn" class="btn btn-primary">
+              <span>Explore Gallery</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#categories" id="hero-categories-btn" class="btn btn-secondary">
+              <span>Discover Categories</span>
+            </a>
+          </div>
+
+          <div class="hero-metrics animate-hero" style="--delay: 320ms">
+            <div class="metric-item">
+              <strong id="hero-total-count">24</strong>
+              <span>Curated Frames</span>
+            </div>
+            <div class="metric-divider" aria-hidden="true"></div>
+            <div class="metric-item">
+              <strong>6</strong>
+              <span>Visual Realms</span>
+            </div>
+            <div class="metric-divider" aria-hidden="true"></div>
+            <div class="metric-item">
+              <strong>4K</strong>
+              <span>Lightbox Detail</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Hero Preview Collage -->
+        <div class="hero-collage animate-hero" style="--delay: 200ms" aria-label="Featured preview collage">
+          <div id="hero-collage-grid" class="collage-grid">
+            <!-- Populated dynamically by script.js with verified curated frames -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Showcase Section -->
+    <section id="categories" class="categories-section section-spacing">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <div>
+            <span class="section-eyebrow">Visual Themes</span>
+            <h2 class="section-title">Discover Categories</h2>
+          </div>
+          <p class="section-description">
+            Six curated visual worlds—from untamed wilderness and brutalist architecture to futuristic circuits and fluid digital forms.
+          </p>
+        </div>
+
+        <div id="category-showcase-grid" class="category-showcase-grid">
+          <!-- Dynamically rendered with live image counts -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Image Gallery Section -->
+    <section id="gallery" class="gallery-section section-spacing">
+      <div class="container">
+        <div class="gallery-top-bar reveal-on-scroll">
+          <div>
+            <span class="section-eyebrow">Interactive Exhibition</span>
+            <h2 class="section-title">Curated Gallery</h2>
+          </div>
+          <div class="gallery-status-pill" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="gallery-count-display">Showing 12 of 24 images</span>
+          </div>
+        </div>
+
+        <!-- Filter Pills + Live Search Control Bar -->
+        <div class="gallery-controls reveal-on-scroll">
+          <div id="filter-pills" class="filter-pills" role="tablist" aria-label="Filter images by category">
+            <!-- Dynamically rendered with live counts -->
+          </div>
+
+          <div class="gallery-search-box" role="search">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="search"
+              id="gallery-search-input"
+              class="gallery-search-input"
+              placeholder="Search title or category..."
+              aria-label="Search gallery images by title or category"
+              autocomplete="off"
+            />
+            <button
+              type="button"
+              id="gallery-search-clear"
+              class="search-clear-btn"
+              aria-label="Clear search query"
+              hidden
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Filter/Search Status Banner -->
+        <div id="active-filter-banner" class="active-filter-banner" hidden>
+          <p id="active-filter-text"></p>
+          <button type="button" id="banner-reset-btn" class="text-action-btn">Clear filters</button>
+        </div>
+
+        <!-- CSS Grid Image Gallery -->
+        <div id="gallery-grid" class="gallery-grid" aria-live="polite">
+          <!-- Cards populated dynamically by script.js -->
+        </div>
+
+        <!-- Empty Search / Favorites State -->
+        <div id="empty-state" class="empty-state" hidden>
+          <div class="empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <h3 id="empty-state-title">No matching images found</h3>
+          <p id="empty-state-message">Try adjusting your search keywords or exploring another category.</p>
+          <button type="button" id="reset-filters-btn" class="btn btn-primary">Show All Images</button>
+        </div>
+
+        <!-- Load More Control -->
+        <div id="load-more-wrap" class="load-more-wrap">
+          <button type="button" id="load-more-btn" class="btn btn-load-more">
+            <span id="load-more-label">Load More Images</span>
+            <span id="load-more-remaining" class="load-more-badge">+6</span>
+          </button>
+          <p id="gallery-end-note" class="gallery-end-note" hidden>
+            You have reached the end of this curated selection.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section section-spacing">
+      <div class="container">
+        <div class="about-layout reveal-on-scroll">
+          <div class="about-intro">
+            <span class="section-eyebrow">About LUMINA</span>
+            <h2 class="section-title">Crafted for Visual Immersion</h2>
+            <p class="about-lead">
+              LUMINA is a digital gallery built around quiet geometry, luminous contrast, and distraction-free photography. Every image is curated for composition, atmospheric light, and narrative clarity.
+            </p>
+            <div class="about-stats-row">
+              <div class="about-stat-card">
+                <strong id="about-total-frames">24</strong>
+                <span>Curated Works</span>
+              </div>
+              <div class="about-stat-card">
+                <strong id="about-total-categories">6</strong>
+                <span>Collections</span>
+              </div>
+              <div class="about-stat-card">
+                <strong id="about-total-favorites">0</strong>
+                <span>Your Favorites</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-pillars">
+            <article class="pillar-card">
+              <div class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
+              <h3>Editorial Composition</h3>
+              <p>Varied aspect ratios and responsive CSS Grid rhythm give each frame room to breathe across every screen.</p>
+            </article>
+
+            <article class="pillar-card">
+              <div class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+              <h3>Personal Curation</h3>
+              <p>Save inspiring works to your persistent Favorites collection and switch effortlessly between dark and light gallery rooms.</p>
+            </article>
+
+            <article class="pillar-card">
+              <div class="pillar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </div>
+              <h3>Cinema Lightbox</h3>
+              <p>Inspect high-resolution details in a keyboard-navigable lightbox synchronized directly with active filters and searches.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Professional Footer -->
+  <footer id="site-footer" class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="brand-logo footer-logo" aria-label="LUMINA Home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none">
+                <path d="M16 4L28 25H4L16 4Z" stroke="url(#footer-brand-grad)" stroke-width="2.4" stroke-linejoin="round" />
+                <circle cx="16" cy="18.5" r="3.4" fill="url(#footer-brand-grad)" />
+                <defs>
+                  <linearGradient id="footer-brand-grad" x1="4" y1="4" x2="28" y2="26" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#A78BFA" />
+                    <stop offset="100%" stop-color="#38D9C5" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="brand-text">LUMINA</span>
+          </a>
+          <p class="footer-description">
+            Explore the world through luminous frames—curating moments of nature, architecture, wildlife, technology, travel, and abstract light.
+          </p>
+          <div class="social-links" aria-label="Social media">
+            <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lumina on Unsplash" title="Unsplash">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M7.5 6.75V0h9v6.75h-9zm9 3.75H24V24H0V10.5h7.5v6.75h9V10.5z"></path>
+              </svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lumina on Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lumina on X" title="X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4l16 16"></path>
+                <path d="M20 4L4 20"></path>
+              </svg>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Lumina on GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery" id="footer-favorites-link">Favorites</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">Categories</h3>
+          <ul id="footer-category-links" class="footer-links">
+            <li><a href="#gallery" data-footer-category="Nature">Nature</a></li>
+            <li><a href="#gallery" data-footer-category="Architecture">Architecture</a></li>
+            <li><a href="#gallery" data-footer-category="Wildlife">Wildlife</a></li>
+            <li><a href="#gallery" data-footer-category="Technology">Technology</a></li>
+            <li><a href="#gallery" data-footer-category="Travel">Travel</a></li>
+            <li><a href="#gallery" data-footer-category="Abstract">Abstract</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Lumina. Capturing moments, creating memories.</p>
+        <p class="footer-credit">Photography curated via Unsplash</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Lightbox Modal -->
+  <div
+    id="lightbox"
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lightbox-title"
+    aria-hidden="true"
+  >
+    <div id="lightbox-dialog" class="lightbox-dialog">
+      <div class="lightbox-topbar">
+        <div class="lightbox-counter-badge">
+          <span id="lightbox-counter">1 / 24</span>
+        </div>
+        <div class="lightbox-top-actions">
+          <button
+            type="button"
+            id="lightbox-fav-btn"
+            class="lightbox-action-btn"
+            aria-label="Toggle favorite"
+            aria-pressed="false"
+            title="Save to favorites"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="lightbox-close"
+            class="lightbox-action-btn lightbox-close-btn"
+            aria-label="Close lightbox"
+            title="Close (Esc)"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="lightbox-stage">
+        <button
+          type="button"
+          id="lightbox-prev"
+          class="lightbox-nav-btn lightbox-prev"
+          aria-label="Previous image"
+          title="Previous (Left Arrow)"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <figure class="lightbox-figure">
+          <div class="lightbox-media-frame">
+            <div id="lightbox-loader" class="lightbox-loader" aria-hidden="true">
+              <span class="spinner"></span>
+            </div>
+            <img id="lightbox-image" class="lightbox-image" alt="" />
+          </div>
+
+          <figcaption class="lightbox-caption">
+            <div class="lightbox-meta-group">
+              <span id="lightbox-category" class="lightbox-category-badge">Nature</span>
+              <h3 id="lightbox-title" class="lightbox-title">Image Title</h3>
+              <p id="lightbox-meta" class="lightbox-meta">Location</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <button
+          type="button"
+          id="lightbox-next"
+          class="lightbox-nav-btn lightbox-next"
+          aria-label="Next image"
+          title="Next (Right Arrow)"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Back-to-Top Button -->
+  <button
+    type="button"
+    id="back-to-top"
+    class="back-to-top"
+    aria-label="Back to top"
+    title="Back to top"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</body>
+</html>
